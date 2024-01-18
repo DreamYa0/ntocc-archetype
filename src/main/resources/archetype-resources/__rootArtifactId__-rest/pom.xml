@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>${rootArtifactId}</artifactId>
+        <groupId>${groupId}</groupId>
+        <version>${version}</version><!-- -SNAPSHOT parentVersion -->
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <name>${artifactId}</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${rootArtifactId}-provider</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.g7.framework</groupId>
+            <artifactId>ntocc-monitor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hibernate-validator</artifactId>
+                    <groupId>org.hibernate.validator</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <artifactId>${rootArtifactId}-rest</artifactId>
+                                    <groupId>${groupId}</groupId>
+                                    <version>${project.parent.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <destFileName>${rootArtifactId}.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>../build/libs/</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

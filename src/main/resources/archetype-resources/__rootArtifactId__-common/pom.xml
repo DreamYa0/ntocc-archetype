@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>${rootArtifactId}</artifactId>
+        <groupId>${groupId}</groupId>
+        <version>${version}</version><!-- -SNAPSHOT parentVersion -->
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>${artifactId}</artifactId>
+    <name>${artifactId}</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
+    <dependencies>
+        <!-- 切面自动化配置 -->
+        <dependency>
+            <groupId>com.g7.framework</groupId>
+            <artifactId>aspect-spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.g7.framework</groupId>
+            <artifactId>idgenerator-spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <!--调度平台自动配置-->
+        <dependency>
+            <groupId>com.g7.framework</groupId>
+            <artifactId>job-spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <!-- kotlin 相关开始 -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+        </dependency>
+        <!-- kotlin 相关结束 -->
+    </dependencies>
+</project>

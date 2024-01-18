@@ -1,0 +1,32 @@
+cache:
+  untracked: true
+  key: ${CI_BUILD_REF}_${CI_BUILD_REF_NAME}
+
+stages:
+  - build
+  - package
+
+job_build:
+  image: registry.cn-beijing.aliyuncs.com/basicplatform/maven:latest
+  stage: build
+  script:
+    - mvn package -U -Dmaven.test.skip=true
+  only:
+    - tags
+    - master
+    - /^test\/.*$/
+    - /^hotfix\/.*$/
+    - /^feature\/.*$/
+    - /^release\/.*$/
+
+job_package:
+  image: docker:dind
+  stage: package
+  script:
+    - DOCKER_REPO=${G7PAY_DOCKER_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${CI_BUILD_TAG:-latest}
+    - docker build -f Dockerfile -t ${DOCKER_REPO} .
+    - mkdir -p   ~/.docker
+    - echo ${DOCKER_AUTH_CONFIG} > ~/.docker/config.json
+    - docker push ${DOCKER_REPO}
+  only:
+    - tags

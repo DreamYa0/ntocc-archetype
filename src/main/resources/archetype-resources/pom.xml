@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+    </parent>
+
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <packaging>pom</packaging>
+    <version>${version}</version><!-- -SNAPSHOT parentVersion -->
+    <name>${artifactId}</name>
+
+    <properties>
+        <!-- 当前项目API接口定义包版本 -->
+        <current.project.api.version>${version}</current.project.api.version>
+        <!-- 编码规则 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <jdk.version>1.8</jdk.version>
+        <hibernate-validator.version>6.0.8.Final</hibernate-validator.version>
+        <org.codehaus.janino.version>3.1.6</org.codehaus.janino.version>
+        <slf4j.version>1.7.32</slf4j.version>
+        <logback.version>1.2.10</logback.version>
+        <log4j2.version>2.17.0</log4j2.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 外部Dubbo项目API接口定义包开始 -->
+
+            <!-- 外部Dubbo项目API接口定义包结束 -->
+
+            <!-- 当前项目API接口定义包开始 -->
+            <dependency>
+                <groupId>${groupId}</groupId>
+                <artifactId>${rootArtifactId}-api</artifactId>
+                <version>${current.project.api.version}</version>
+            </dependency>
+            <!-- 当前项目API接口定义包结束 -->
+
+            <!-- ntocc 公共开发组件开始 -->
+            <!--dubbo 暴露Http调用-->
+            <dependency>
+                <groupId>com.g7.framework</groupId>
+                <artifactId>dubbo-exporter</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+            </dependency>
+            <!-- 雪花算法ID生成器自动化配置 -->
+            <dependency>
+                <groupId>com.g7.framework</groupId>
+                <artifactId>idgenerator-spring-boot-autoconfigure</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+            </dependency>
+            <!-- 切面自动化配置 -->
+            <dependency>
+                <groupId>com.g7.framework</groupId>
+                <artifactId>aspect-spring-boot-autoconfigure</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+            </dependency>
+            <!--调度平台自动化配置-->
+            <dependency>
+                <groupId>com.g7.framework</groupId>
+                <artifactId>job-spring-boot-autoconfigure</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+            </dependency>
+            <!--monitor 自动化配置-->
+            <dependency>
+                <groupId>com.g7.framework</groupId>
+                <artifactId>ntocc-monitor</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+            </dependency>
+            <!--dubbo 自动化配置-->
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>0.2.0</version>
+            </dependency>
+            <!--apollo配置中心-->
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>0.1.12-SNAPSHOT</version>
+            </dependency>
+            <!-- ntocc 公共开发组件结束 -->
+
+            <!-- 通用工具组件开始 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.5.2</version>
+            </dependency>
+            <!-- 入参校验注解组件 -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>23.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.18</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- 通用工具组件结束 -->
+            <!-- kotlin 相关开始 -->
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib-jdk8</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-reflect</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlinx</groupId>
+                <artifactId>kotlinx-coroutines-core</artifactId>
+                <version>1.3.7</version>
+            </dependency>
+            <!-- kotlin 相关结束 -->
+            <!-- 日志组件开始 -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>4.11</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.janino</groupId>
+                <artifactId>janino</artifactId>
+                <version>${org.codehaus.janino.version}</version>
+            </dependency>
+            <!-- 日志组件结束 -->
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!-- kotlin-maven-plugin 必现在 maven-compiler-plugin 前面 -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
+                    <compilerPlugins>
+                        <plugin>spring</plugin>
+                    </compilerPlugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>java-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>java-test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!--Debug日志信息控制台打印-->
+                    <argLine>-Dlogback.env=dev</argLine>
+                    <!--<skipTests>true</skipTests>-->
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+</project>

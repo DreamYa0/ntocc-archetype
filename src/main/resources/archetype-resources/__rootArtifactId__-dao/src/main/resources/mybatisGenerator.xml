@@ -1,0 +1,118 @@
+#set( $symbol_pound = '#' )
+        #set( $symbol_dollar = '$' )
+        #set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+                "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="MSTables" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="utf-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!--覆盖生成XML文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
+        <!-- 数据Model Cloneable插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.ModelCloneablePlugin"/>
+
+        <!-- 数据Model Serializable插件 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!-- 数据Model ToString插件 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!-- 查询单条数据插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
+
+        <!-- MySQL分页插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.LimitPlugin">
+            <!-- 通过配置startPage影响Example中的page方法开始分页的页码，默认分页从1开始 -->
+            <property name="startPage" value="1"/>
+        </plugin>
+
+        <!-- 数据Model链式构建插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.ModelBuilderPlugin"/>
+
+        <!-- Example Criteria 增强插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.ExampleEnhancedPlugin">
+            <!-- 是否支持已经过时的andIf方法（推荐使用when代替），默认支持 -->
+            <property name="enableAndIf" value="false"/>
+        </plugin>
+
+        <!-- 批量插入插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.BatchInsertPlugin">
+            <!-- 开启后可以实现官方插件根据属性是否为空决定是否插入该字段功能！需开启allowMultiQueries=true多条sql提交操作，所以不建议使用！插件默认不开启 -->
+            <property name="allowMultiQueries" value="true"/>
+        </plugin>
+
+        <!-- 存在即更新插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.UpsertPlugin">
+            <!-- 支持upsertByExample，upsertByExampleSelective操作！需开启allowMultiQueries=true多条sql提交操作，所以不建议使用！插件默认不开启 -->
+            <property name="allowMultiQueries" value="true"/>
+            <!-- 开启批量功能，支持batchUpsert,batchUpsertWithBLOBs,batchUpserSelective！这几个方法中无法支持IncrementsPlugin的方法！插件默认不开启 -->
+            <property name="allowBatchUpsert" value="true"/>
+        </plugin>
+
+        <!-- 数据Model属性对应Column获取插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.ModelColumnPlugin"/>
+
+        <!-- Selective选择插入更新增强插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.SelectiveEnhancedPlugin"/>
+
+        <!-- 查询结果选择性返回插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.SelectSelectivePlugin" />
+
+        <!-- 状态枚举生成插件 -->
+        <plugin type="com.g7.framework.mybatis.generator.plugins.EnumTypeStatusPlugin">
+            <!-- 是否开启自动扫描根据约定注释格式生成枚举，默认true 枚举字段注释格式如：'注释[success(0):成功, fail(1):失败]' -->
+            <property name="autoScan" value="true"/>
+            <!-- autoScan为false,这里可以定义全局需要检查生成枚举类的列名 -->
+            <property name="enumColumns" value="type, status"/>
+        </plugin>
+
+        <commentGenerator type="com.g7.framework.mybatis.generator.plugins.G7CommentGenerator">
+            <property name="suppressAllComments" value="false"/>
+            <!--生成的注释包含时间戳-->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!-- 预发布数据库连接地址 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://rm-2zep114yhnld70zcj.mysql.rds.aliyuncs.com/ntocc_test"
+                        userId="obill_rw"
+                        password="Xs5VGMLrDUV4RcXm">
+            <!-- 针对mysql数据库 -->
+            <!--<property name="useInformationSchema" value="true"/>-->
+        </jdbcConnection>
+
+        <javaTypeResolver type="com.g7.framework.mybatis.generator.plugins.utils.enhanced.G7JavaTypeResolver">
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="${package}.dao.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="${package}.dao.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${package}.dao.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="ntocc_car" domainObjectName="NtoccCar" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
